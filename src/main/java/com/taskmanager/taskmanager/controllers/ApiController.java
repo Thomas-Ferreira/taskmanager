@@ -15,12 +15,12 @@ import com.taskmanager.taskmanager.services.taskService;
 
 @RestController
 @RequestMapping("/api")
-public class taskController {
+public class ApiController {
     
     private final taskService TaskService;
 
     @Autowired
-    public taskController(taskService TaskService){
+    public ApiController(taskService TaskService){
         this.TaskService = TaskService;
     }
 

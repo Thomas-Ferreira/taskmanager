@@ -1,10 +1,11 @@
 package com.taskmanager.taskmanager.model;
 
-//import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,16 +18,19 @@ public class task {
 
 	private String titre;
 	private String contenu;
-	private String auteur;
+
+    @ManyToOne
+    @JoinColumn(name = "auteurId")
+	private user auteurId;
 
     // Default constructor (needed by JPA)
     public task() {}
     
     // Constructor with parameters
-    public task(String titre, String contenu, String auteur) {
+    public task(String titre, String contenu, user auteurId) {
         this.titre = titre;
         this.contenu = contenu;
-        this.auteur = auteur;
+        this.auteurId = auteurId;
     }
 
     public String getTitre() {
@@ -37,8 +41,8 @@ public class task {
         return contenu;
     }
 
-    public String getAuteur() {
-        return auteur;
+    public user getAuteur() {
+        return auteurId;
     }
 
     public void setTitre(String titre) {
@@ -49,7 +53,7 @@ public class task {
         this.contenu = contenu;
     }
 
-    public void setAuteur(String auteur) {
-        this.auteur = auteur;
+    public void setAuteur(user auteurId) {
+        this.auteurId = auteurId;
     }
 }
