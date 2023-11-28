@@ -20,7 +20,7 @@ public class user {
 
     private String username;
 
-    @OneToMany(mappedBy = "auteurId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
     private List<task> tasks;
 
     public String getUsername() {
@@ -29,5 +29,9 @@ public class user {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

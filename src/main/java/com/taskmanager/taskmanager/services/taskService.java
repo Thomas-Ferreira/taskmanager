@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.taskmanager.taskmanager.repositories.taskRepository;
 import com.taskmanager.taskmanager.model.task;
+import com.taskmanager.taskmanager.model.user;
 
 @Service
 public class taskService {
@@ -17,8 +18,8 @@ public class taskService {
         this.TaskRepository = TaskRepository;
     }
 
-    public List<task> getAllTasks() {
-        return TaskRepository.findAll();
+    public List<task> getAllTasks(user User) {
+        return TaskRepository.findByUser(User);
     }
 
     public task getTaskById(Integer taskId){

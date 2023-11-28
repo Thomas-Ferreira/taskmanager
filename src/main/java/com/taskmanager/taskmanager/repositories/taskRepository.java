@@ -7,9 +7,11 @@ import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Repository;
 
 import com.taskmanager.taskmanager.model.task;
+import com.taskmanager.taskmanager.model.user;
 
 @Repository
 public interface taskRepository extends JpaRepository<task, Integer> {
     List<task> findAll();
     task save(Task task);
+    List<task> findByUser(user User);
 }

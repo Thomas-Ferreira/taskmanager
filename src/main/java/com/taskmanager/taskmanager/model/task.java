@@ -20,17 +20,17 @@ public class task {
 	private String contenu;
 
     @ManyToOne
-    @JoinColumn(name = "auteurId")
-	private user auteurId;
+    @JoinColumn(name = "userId")
+	private user User;
 
     // Default constructor (needed by JPA)
     public task() {}
     
     // Constructor with parameters
-    public task(String titre, String contenu, user auteurId) {
+    public task(String titre, String contenu, user User) {
         this.titre = titre;
         this.contenu = contenu;
-        this.auteurId = auteurId;
+        this.User = User;
     }
 
     public String getTitre() {
@@ -41,8 +41,8 @@ public class task {
         return contenu;
     }
 
-    public user getAuteur() {
-        return auteurId;
+    public user getUser() {
+        return User;
     }
 
     public void setTitre(String titre) {
@@ -53,7 +53,7 @@ public class task {
         this.contenu = contenu;
     }
 
-    public void setAuteur(user auteurId) {
-        this.auteurId = auteurId;
+    public void setUser(user User) {
+        this.User = User;
     }
 }
