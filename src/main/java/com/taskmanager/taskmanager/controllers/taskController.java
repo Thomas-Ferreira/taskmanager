@@ -3,9 +3,10 @@ package com.taskmanager.taskmanager.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,4 +29,16 @@ public class taskController {
         List<task> tasks = TaskService.getAllTasks();
         return tasks;
     }
+
+    @GetMapping("/{id}")
+    public task getOneTaskById(@PathVariable Integer id){
+        return TaskService.getTaskById(id);
+    }
+
+    @PostMapping("/")
+    public String createTask(@RequestBody task task){
+        TaskService.createTask(task);
+        return "task created successfully";
+    }
+    
 }

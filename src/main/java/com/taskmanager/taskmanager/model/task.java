@@ -1,7 +1,9 @@
 package com.taskmanager.taskmanager.model;
 
-import jakarta.persistence.Column;
+//import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,17 +12,22 @@ import jakarta.persistence.Table;
 public class task {
     
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="titre")
 	private String titre;
-	
-	@Column(name="contenu")
 	private String contenu;
-	
-	@Column(name="auteur")
 	private String auteur;
+
+    // Default constructor (needed by JPA)
+    public task() {}
+    
+    // Constructor with parameters
+    public task(String titre, String contenu, String auteur) {
+        this.titre = titre;
+        this.contenu = contenu;
+        this.auteur = auteur;
+    }
 
     public String getTitre() {
         return titre;
