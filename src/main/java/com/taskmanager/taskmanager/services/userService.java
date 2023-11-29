@@ -3,7 +3,7 @@ package com.taskmanager.taskmanager.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.taskmanager.taskmanager.model.user;
+import com.taskmanager.taskmanager.model.User;
 import com.taskmanager.taskmanager.repositories.userRepository;
 
 @Service
@@ -16,7 +16,7 @@ public class userService {
         this.UserRepository = UserRepository;
     }
 
-    public user getUserById(Integer userId){
+    public User getUserById(Integer userId){
         return UserRepository.findById(userId).orElse(null);
     }
     

@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.taskmanager.taskmanager.repositories.taskRepository;
-import com.taskmanager.taskmanager.model.task;
-import com.taskmanager.taskmanager.model.user;
+import com.taskmanager.taskmanager.model.Task;
+import com.taskmanager.taskmanager.model.User;
 
 @Service
 public class taskService {
@@ -18,15 +18,15 @@ public class taskService {
         this.TaskRepository = TaskRepository;
     }
 
-    public List<task> getAllTasks(user User) {
+    public List<Task> getAllTasks(User User) {
         return TaskRepository.findByUser(User);
     }
 
-    public task getTaskById(Integer taskId){
+    public Task getTaskById(Integer taskId){
         return TaskRepository.findById(taskId).orElse(null);
     }
 
-    public task createTask(task task){
+    public Task createTask(Task task){
         return TaskRepository.save(task);
     }
     

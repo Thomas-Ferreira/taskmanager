@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "TASKS")
-public class task {
+public class Task {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,16 +21,16 @@ public class task {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-	private user User;
+	private User user;
 
     // Default constructor (needed by JPA)
-    public task() {}
+    public Task() {}
     
     // Constructor with parameters
-    public task(String titre, String contenu, user User) {
+    public Task(String titre, String contenu, User user) {
         this.titre = titre;
         this.contenu = contenu;
-        this.User = User;
+        this.user = user;
     }
 
     public String getTitre() {
@@ -41,8 +41,8 @@ public class task {
         return contenu;
     }
 
-    public user getUser() {
-        return User;
+    public User getUser() {
+        return user;
     }
 
     public void setTitre(String titre) {
@@ -53,7 +53,7 @@ public class task {
         this.contenu = contenu;
     }
 
-    public void setUser(user User) {
-        this.User = User;
+    public void setUser(User User) {
+        this.user = User;
     }
 }

@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "USERS")
-public class user {
+public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +20,8 @@ public class user {
 
     private String username;
 
-    @OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
-    private List<task> tasks;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Task> tasks;
 
     public String getUsername() {
         return username;
