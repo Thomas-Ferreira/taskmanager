@@ -29,6 +29,12 @@ public class ApiController {
     @Autowired
     private userService UserService;
 
+    @GetMapping("/{userId}/userInfo")
+    public ResponseEntity<User> getUserInfo(@PathVariable Integer userId){
+        User user = UserService.getUserById(userId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
     @GetMapping("/{userId}")
     public ResponseEntity<List<TaskResponse>> getTasksForUsers(@PathVariable Integer userId){
         User user = UserService.getUserById(userId);
