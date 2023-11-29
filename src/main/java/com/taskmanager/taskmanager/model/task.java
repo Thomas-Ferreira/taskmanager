@@ -33,6 +33,10 @@ public class Task {
         this.user = user;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getTitre() {
         return titre;
     }

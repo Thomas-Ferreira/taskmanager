@@ -15,3 +15,4 @@ CREATE TABLE TASKS (
 
 INSERT INTO USERS (username) VALUES ('Thomas');
 INSERT INTO TASKS (titre, contenu, USER_ID) VALUES ('task 1', 'un contenu', (SELECT id FROM USERS WHERE username = 'Thomas'));
+INSERT INTO TASKS (titre, contenu, USER_ID) VALUES ('task 2', 'un autre contenu', (SELECT id FROM USERS WHERE username = 'Thomas'));
