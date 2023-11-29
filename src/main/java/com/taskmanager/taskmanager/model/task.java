@@ -20,7 +20,7 @@ public class Task {
 	private String contenu;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "USER_ID")
 	private User user;
 
     // Default constructor (needed by JPA)

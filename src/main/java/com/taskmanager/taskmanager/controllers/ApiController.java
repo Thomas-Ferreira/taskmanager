@@ -28,7 +28,7 @@ public class ApiController {
     private userService UserService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<Task>> getAllTasks(@PathVariable Integer userId){
+    public ResponseEntity<List<Task>> getTasksForUsers(@PathVariable Integer userId){
         User user = UserService.getUserById(userId);
         if (user != null) {
             List<Task> tasksForUser = TaskService.getAllTasks(user);
