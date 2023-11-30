@@ -16,7 +16,7 @@ public class userService {
         this.UserRepository = UserRepository;
     }
 
-    public User getUserById(Integer userId){
+    public User getUserById(Long userId){
         return UserRepository.findById(userId).orElse(null);
     }
     

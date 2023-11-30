@@ -1,6 +1,8 @@
 package com.taskmanager.taskmanager.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +24,11 @@ public class taskService {
         return TaskRepository.findByUser(User);
     }
 
-    public Task getTaskById(Integer taskId){
-        return TaskRepository.findById(taskId).orElse(null);
+    public Optional<Task> getTaskByUserAndId(Long taskId, Long userId){
+        return TaskRepository.findByIdAndUser_Id(taskId, userId);
     }
 
-    public Task createTask(Task task){
+    public Task createTaskForUser(Task task){
         return TaskRepository.save(task);
     }
     

@@ -1,6 +1,7 @@
 package com.taskmanager.taskmanager.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.taskmanager.taskmanager.model.Task;
+import com.taskmanager.taskmanager.model.TaskRequest;
 import com.taskmanager.taskmanager.model.TaskResponse;
 import com.taskmanager.taskmanager.model.User;
 import com.taskmanager.taskmanager.services.taskService;
@@ -30,13 +32,13 @@ public class ApiController {
     private userService UserService;
 
     @GetMapping("/{userId}/userInfo")
-    public ResponseEntity<User> getUserInfo(@PathVariable Integer userId){
+    public ResponseEntity<User> getUserInfo(@PathVariable Long userId){
         User user = UserService.getUserById(userId);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<TaskResponse>> getTasksForUsers(@PathVariable Integer userId){
+    public ResponseEntity<List<TaskResponse>> getTasksForUsers(@PathVariable Long userId){
         User user = UserService.getUserById(userId);
         if (user != null) {
             List<Task> tasksForUser = TaskService.getAllTasks(user);
@@ -47,15 +49,23 @@ public class ApiController {
         }
     }
 
-    /*@GetMapping("/{userId}/{id}")
-    public Task getOneTaskById(@PathVariable Integer userId, @PathVariable Integer id){
-        return TaskService.getTaskById(id);
-    }*/
+    @GetMapping("/{userId}/{taskId}")
+    public ResponseEntity<TaskResponse> getOneTaskById(@PathVariable Long userId, @PathVariable Long taskId){
+        Optional<Task> taskOptional = TaskService.getTaskByUserAndId(taskId, userId);
+        if (taskOptional.isPresent()) {
+            TaskResponse taskResponse = TaskResponse.fromTask(taskOptional.get());
+            return new ResponseEntity<>(taskResponse, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
-    @PostMapping("/")
-    public String createTask(@RequestBody Task task){
-        TaskService.createTask(task);
-        return "task created successfully";
+    @PostMapping("/{userId}")
+    public ResponseEntity<Task> createTask(@PathVariable Long userId, @RequestBody TaskRequest taskRequest){
+        User user = UserService.getUserById(userId);
+        Task newTask = new Task(taskRequest.getTitre(), taskRequest.getContenu(), user);
+        Task response = TaskService.createTaskForUser(newTask);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
     
 }

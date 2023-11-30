@@ -3,7 +3,7 @@ package com.taskmanager.taskmanager.model;
 
 public interface TaskResponse {
 
-    Integer getId();
+    Long getId();
     String getTitre();
     String getContenu();
 
@@ -11,7 +11,7 @@ public interface TaskResponse {
         return new TaskResponse() {
 
             @Override
-            public Integer getId() {
+            public Long getId() {
                 return task.getId();
             }
 
