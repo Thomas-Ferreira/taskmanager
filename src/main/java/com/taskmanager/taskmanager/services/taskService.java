@@ -31,5 +31,10 @@ public class taskService {
     public Task createTaskForUser(Task task){
         return TaskRepository.save(task);
     }
+
+    public void deleteTaskByIdAndUserId(Long taskId, Long userId){
+        Optional<Task> taskOptional= TaskRepository.findByIdAndUser_Id(taskId, userId);
+        taskOptional.ifPresent(TaskRepository::delete); 
+    }
     
 }
