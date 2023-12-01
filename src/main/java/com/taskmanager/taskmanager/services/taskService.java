@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.taskmanager.taskmanager.repositories.taskRepository;
 import com.taskmanager.taskmanager.model.Task;
+import com.taskmanager.taskmanager.model.TaskRequest;
 import com.taskmanager.taskmanager.model.User;
 
 @Service
@@ -35,6 +36,18 @@ public class taskService {
     public void deleteTaskByIdAndUserId(Long taskId, Long userId){
         Optional<Task> taskOptional= TaskRepository.findByIdAndUser_Id(taskId, userId);
         taskOptional.ifPresent(TaskRepository::delete); 
+    }
+
+    public Optional<Task> updateTaskByIdAndUserId(Long taskId, Long userId, TaskRequest updatedTask){
+        Optional<Task> existingTaskOptional = TaskRepository.findByIdAndUser_Id(taskId, userId);
+        if (existingTaskOptional.isPresent()) {
+            Task existingTask = existingTaskOptional.get();
+            existingTask.setTitre(updatedTask.getTitre() != null ? updatedTask.getTitre() : existingTask.getTitre());
+            existingTask.setContenu(updatedTask.getContenu() != null ? updatedTask.getContenu() : existingTask.getContenu());
+            return Optional.of(TaskRepository.save(existingTask));
+        } else {
+            return Optional.empty();
+        }
     }
     
 }
